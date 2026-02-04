@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* Styles copied from project root to provide consistent UI for student app */
+=======
+>>>>>>> fc64544 (Initial commit)
 :root {
   color-scheme: light;
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
@@ -112,7 +115,11 @@ table {
 }
 
 th,
+<<<<<<< HEAD
  td {
+=======
+td {
+>>>>>>> fc64544 (Initial commit)
   text-align: left;
   padding: 12px 10px;
   border-bottom: 1px solid #e2e8f0;
@@ -149,6 +156,7 @@ th {
   input {
     width: 100%;
   }
+<<<<<<< HEAD
 }
 
 /* small utility for images used on the about page */
@@ -159,3 +167,6 @@ th {
   display: block;
   margin-top: 8px;
 }
+=======
+}
+>>>>>>> fc64544 (Initial commit)
