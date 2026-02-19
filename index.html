@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -77,73 +76,4 @@
         </main>
     </body>
 </html>
-=======
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Student Record Manager</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main class="container">
-      <header class="hero">
-        <h1>Student Record Manager</h1>
-        <p>Track student names and marks locally in your browser.</p>
-      </header>
-
-      <section class="card">
-        <h2>Add student</h2>
-        <form id="student-form" class="form">
-          <label class="field">
-            <span>Student name</span>
-            <input
-              id="student-name"
-              name="student-name"
-              type="text"
-              placeholder="e.g. Veeresh Salagar"
-              autocomplete="off"
-              required
-            />
-          </label>
-          <label class="field">
-            <span>Marks</span>
-            <input
-              id="student-marks"
-              name="student-marks"
-              type="number"
-              placeholder="0 - 100"
-              min="0"
-              max="100"
-              required
-            />
-          </label>
-          <button type="submit">Add record</button>
-        </form>
-        <p id="form-message" class="message" aria-live="polite"></p>
-      </section>
-
-      <section class="card">
-        <div class="section-header">
-          <h2>Student list</h2>
-          <button id="clear-records" class="ghost">Clear all</button>
-        </div>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Marks</th>
-              </tr>
-            </thead>
-            <tbody id="student-table"></tbody>
-          </table>
-        </div>
-        <p id="empty-state" class="empty">No records yet. Add a student to get started.</p>
-      </section>
-    </main>
-
-    <script src="script.js"></script>
-  </body>
-</html>
  
->>>>>>> fc64544 (Initial commit)
