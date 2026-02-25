@@ -1,66 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAS app</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veeresh | Software IV&V Engineer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+
+<style>
+:root{
+  --primary:#1e293b;
+  --accent:#2563eb;
+  --light:#f8fafc;
+  --dark:#0f172a;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:var(--dark);
+  color:white;
+  line-height:1.6;
+}
+
+#particles-js{
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:-1;
+}
+
+section{
+  padding:80px 12%;
+}
+
+h2{
+  margin-bottom:30px;
+  font-size:28px;
+  color:var(--accent);
+}
+
+.hero{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:100vh;
+}
+
+.hero-text{
+  flex:1;
+}
+
+.hero-text h1{
+  font-size:45px;
+}
+
+.hero-text span{
+  color:var(--accent);
+}
+
+.hero-text p{
+  margin:20px 0;
+  max-width:500px;
+}
+
+.hero-img{
+  flex:1;
+  text-align:center;
+}
+
+.hero-img img{
+  width:320px;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.6);
+}
+
+.btn{
+  display:inline-block;
+  padding:12px 20px;
+  background:var(--accent);
+  color:white;
+  text-decoration:none;
+  border-radius:8px;
+  margin-top:10px;
+}
+
+.timeline{
+  border-left:3px solid var(--accent);
+  padding-left:20px;
+}
+
+.timeline-item{
+  margin-bottom:40px;
+}
+
+.timeline-item h3{
+  color:var(--accent);
+}
+
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+}
+
+.skill-card{
+  background:var(--primary);
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  transition:0.3s;
+}
+
+.skill-card:hover{
+  transform:translateY(-5px);
+  background:var(--accent);
+}
+
+.contact-box{
+  background:var(--primary);
+  padding:30px;
+  border-radius:12px;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  background:#0c1220;
+}
+</style>
 </head>
+
 <body>
-    <h1>Veeresh Salagar</h1> 
-    <h2>I'm a Tester and Web Developer</h2>
-    <hr />
-    <h3><a href="./pages/About me.html">About me<br><img class="fit-picture" height="350" src="../Dad.png" alt="Me and mom"/></a></h3>
 
-    <h3>Contact information :</h3>
-    <h4>Phone: 7847848330 </h4>
-    <h4>Email: Veereshsss784@gmail.com</h4>
-    <hr>
-    <h4>My Family</h4>
-    <img src="../Veeresh.png" alt="mom" height="100"> <img src="../Dad.png" alt="dad" height="130"> <img src="../sister.png" alt="sisters" height="160">
-    <p>mom,dad,sisters</p>
-    <br>
-    <h4>My Software Testing Skills:</h4>
-    <ul>
-        <li>SDLC Knowledge</li>
-        <li>Test Tools (e.g., Selenium, JUnit, <a href="https://testng.org/doc/documentation-main.html">TestNG</a>)</li>
-        <li>Test Case Creation and Execution</li>
-        <li>Defect Identification and Reporting</li>
-        <li>Problem Solving and Debugging</li>
-        <li>Agile Methodologies</li>
-        <li>Analytical Skills</li>
-        <li>Collaboration and Communication</li>
-        <li>Attention to Detail</li>
-    </ul>
-    
-    <h4>Front-End Web Developer Key Skills:</h4>
-    <ol>
-        <a href="https://www.w3schools.com/html/default.asp"><li>HTML</li></a>
-        <a href="https://www.w3schools.com/css/default.asp"><li>CSS</li></a>    
-        <a href="https://www.w3schools.com/js/default.asp"><li>JavaScript</li></a> 
-        <li>Responsive Web Design</li>
-        <li>Front-End Frameworks (e.g., React, Angular, Vue.js)</li>
-        <li>Web Design Principles</li>
-        <li>User Experience (UX) Design</li>
-        <li>Cross-Browser Compatibility</li>
-        <li>Web Accessibility Standards</li>
-        <li>Version Control (e.g., Git)</li>
-        <li>Debugging and Troubleshooting</li>
-        <li> Performance Optimization</li>
-        <li>Familiarity with RESTful APIs</li>
-        <li>Testing and Debugging Tools (e.g., Chrome DevTools)</li>
-    </ol>
- 
-        <hr style="width: 70%">
+<div id="particles-js"></div>
 
-    <p>The skills mentioned above are highly valuable in the field of front-end web development. 
-        They are powerful tools that enable developers to create visually appealing, responsive, <br>
-        and user-friendly websites. While they may seem intimidating at first, these skills are 
-         actually quite accessible and can be learned with relative ease. With the abundance of <br>
-         online resources, tutorials, and communities available, individuals interested 
-         in front-end web development can embark on a learning journey and acquire these skills <br>
-          at their own pace. Mastering these skills opens up numerous opportunities to build 
-          engaging web interfaces and contribute to the ever-evolving digital landscape. <br>
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Hi, I'm <span>Veeresh</span></h1>
+    <h3>Software IV&V Engineer</h3>
+    <p>
+      Results-driven Software IV&V Engineer with 4+ years of experience at LRDE (DRDO).
+      Specialized in manual and automation testing, integration validation, regression testing,
+      and GUI application testing.
     </p>
+    <a href="resume.pdf" class="btn" download>Download Resume</a>
+  </div>
+
+  <div class="hero-img">
+    <img src="assets/profile.jpg" alt="Veeresh Profile">
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section>
+<h2>Professional Experience</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<h3>Software IV&V Engineer</h3>
+<p><strong>LRDE (DRDO) – GVR Technolabs Pvt. Ltd.</strong></p>
+<p>May 2024 – Present</p>
+<ul>
+<li>Conducting integration & validation testing as per defense standards.</li>
+<li>Testing simulator GUI applications.</li>
+<li>Peer review of test cases for verification & validation.</li>
+<li>Defect tracking in Jira.</li>
+<li>Working with SDLC, STLC & Agile methodologies.</li>
+</ul>
+</div>
+
+<div class="timeline-item">
+<h3>Software Test Engineer</h3>
+<p><strong>The Metromax Group – Innowyze Global Solutions</strong></p>
+<p>Nov 2020 – 2024</p>
+<ul>
+<li>Automation testing using Selenium.</li>
+<li>API testing & performance testing (JMeter).</li>
+<li>Writing test plans & test cases.</li>
+<li>Regression & white box testing.</li>
+</ul>
+</div>
+
+</div>
+</section>
+
+<!-- SKILLS -->
+<section>
+<h2>Core Skills</h2>
+<div class="skills-grid">
+<div class="skill-card">Selenium Automation</div>
+<div class="skill-card">Manual Testing</div>
+<div class="skill-card">API Testing</div>
+<div class="skill-card">JMeter</div>
+<div class="skill-card">Cucumber</div>
+<div class="skill-card">TestNG</div>
+<div class="skill-card">Appium</div>
+<div class="skill-card">SDLC & STLC</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section>
+<h2>Contact</h2>
+<div class="contact-box">
+Email: veereshsss784@gmail.com <br>
+Phone: +91 6361512171 <br>
+Location: Bangalore, India
+</div>
+</section>
+
+<footer>
+© 2026 Veeresh | Software IV&V Engineer
+</footer>
+
+<script>
+particlesJS("particles-js",{
+particles:{number:{value:45},
+size:{value:3},
+move:{speed:1.5},
+line_linked:{enable:true}}
+});
+</script>
 
 </body>
 </html>
