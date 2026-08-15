@@ -4,7 +4,7 @@ test.describe('Portfolio Core Validation', () => {
   
   test.beforeEach(async ({ page }) => {
     // Navigate to local port with domcontentloaded
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.goto('./', { waitUntil: 'domcontentloaded' });
   });
 
   test('should load the page and verify main navigation', async ({ page }) => {
