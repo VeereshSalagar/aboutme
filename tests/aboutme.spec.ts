@@ -12,7 +12,7 @@ test.describe('Portfolio Core Validation', () => {
     
     // Check main brand link
     await expect(page.getByRole('link', { name: 'Veeresh.' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Veeresh.' })).toHaveText('Veeresh Salagar.');
+    await expect(page.getByRole('link', { name: 'Veeresh.' })).toHaveText('Veeresh.');
     // Check exact navigation links inside the nav bar
     await expect(nav.getByRole('link', { name: 'About', exact: true })).toBeVisible();
     await expect(nav.getByRole('link', { name: 'Projects', exact: true })).toBeVisible();
