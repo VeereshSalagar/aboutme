@@ -1,0 +1,23 @@
+{
+  "name": "aboutme",
+  "version": "1.0.0",
+  "description": "This repository contains the source code for my personal portfolio website. It showcases my experience, skills, and projects as a Software IV&V Engineer and validation specialist. The site is built with plain HTML, CSS and JavaScript and is designed to be lightweight and responsive.",
+  "main": "script.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VeereshSalagar/aboutme.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/VeereshSalagar/aboutme/issues"
+  },
+  "homepage": "https://github.com/VeereshSalagar/aboutme#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0"
+  }
+}

@@ -1,3 +1,4 @@
+// ===== TYPING EFFECT =====
 const texts = [
   "Software IV&V Engineer",
   "Radar System Validation Specialist",
@@ -9,90 +10,92 @@ let count = 0;
 let index = 0;
 let currentText = "";
 let letter = "";
+let isDeleting = false;
 
 (function type() {
-
   if (count === texts.length) {
     count = 0;
   }
 
   currentText = texts[count];
-  letter = currentText.slice(0, ++index);
+
+  if (isDeleting) {
+    letter = currentText.slice(0, --index);
+  } else {
+    letter = currentText.slice(0, ++index);
+  }
 
   document.getElementById("typing").textContent = letter;
 
-  if (letter.length === currentText.length) {
-    count++;
-    index = 0;
-    setTimeout(type, 1500);
-  } else {
-    setTimeout(type, 80);
+  let typeSpeed = 80;
+
+  if (isDeleting) {
+    typeSpeed /= 2;
   }
 
+  if (!isDeleting && letter.length === currentText.length) {
+    typeSpeed = 2000; // Pause at end
+    isDeleting = true;
+  } else if (isDeleting && letter.length === 0) {
+    isDeleting = false;
+    count++;
+    typeSpeed = 500; // Pause before next string
+  }
+
+  setTimeout(type, typeSpeed);
 })();
 
-// ===== PARTICLE ANIMATION =====
+// ===== NAVBAR SCROLL EFFECT =====
+const navbar = document.getElementById('navbar');
 
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// ===== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS =====
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.15
+};
 
-let particlesArray = [];
-
-class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+      // Optional: unobserve if you only want the animation to happen once
+      // observer.unobserve(entry.target);
     }
+  });
+}, observerOptions);
 
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
+// Observe all elements with the 'hidden' class
+const hiddenElements = document.querySelectorAll('.hidden');
+hiddenElements.forEach((el) => observer.observe(el));
 
-        if (this.x > canvas.width || this.x < 0) {
-            this.speedX *= -1;
-        }
-        if (this.y > canvas.height || this.y < 0) {
-            this.speedY *= -1;
-        }
+// ===== ACTIVE NAVIGATION HIGHLIGHT =====
+const sections = document.querySelectorAll('.section, .hero');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    if (scrollY >= (sectionTop - 200)) {
+      current = section.getAttribute('id');
     }
+  });
 
-    draw() {
-        ctx.fillStyle = "#00f5ff";
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active');
     }
-}
-
-function initParticles() {
-    particlesArray = [];
-    for (let i = 0; i < 120; i++) {
-        particlesArray.push(new Particle());
-    }
-}
-
-function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
-    }
-
-    requestAnimationFrame(animateParticles);
-}
-
-initParticles();
-animateParticles();
-
-window.addEventListener("resize", function () {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    initParticles();
+  });
 });

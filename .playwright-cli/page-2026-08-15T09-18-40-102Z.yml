@@ -1,0 +1,130 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e3]:
+    - navigation [ref=e4]:
+      - link "Veeresh." [ref=e5] [cursor=pointer]:
+        - /url: "#"
+      - list [ref=e6]:
+        - listitem [ref=e7]:
+          - link "About" [ref=e8] [cursor=pointer]:
+            - /url: "#about"
+        - listitem [ref=e9]:
+          - link "Experience" [ref=e10] [cursor=pointer]:
+            - /url: "#experience"
+        - listitem [ref=e11]:
+          - link "Skills" [ref=e12] [cursor=pointer]:
+            - /url: "#skills"
+        - listitem [ref=e13]:
+          - link "Projects" [ref=e14] [cursor=pointer]:
+            - /url: "#projects"
+        - listitem [ref=e15]:
+          - link "Contact" [ref=e16] [cursor=pointer]:
+            - /url: "#contact"
+      - text: 
+  - main [ref=e17]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - paragraph [ref=e21]: Hi, I'm
+        - heading "Veeresh Salagar" [level=1] [ref=e22]
+        - heading "Softwa|" [level=2] [ref=e23]
+        - paragraph [ref=e24]: Validation of mission-critical radar and aerospace systems, specializing in system testing and software reliability assurance.
+        - generic [ref=e25]:
+          - link "Download Resume " [ref=e26] [cursor=pointer]:
+            - /url: resume.pdf
+            - generic [ref=e27]: Download Resume
+            - generic [ref=e28]: 
+          - link "View Projects " [ref=e29] [cursor=pointer]:
+            - /url: "#projects"
+            - generic [ref=e30]: View Projects
+            - generic [ref=e31]: 
+        - generic [ref=e32]:
+          - link "LinkedIn" [ref=e33] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/veeresh-salagar-996815156/
+            - generic [ref=e34]: 
+          - link "GitHub" [ref=e35] [cursor=pointer]:
+            - /url: https://github.com/VeereshSalagar
+            - generic [ref=e36]: 
+      - img "Veeresh Salagar Avatar" [ref=e39]
+    - generic [ref=e41]:
+      - heading "About Me" [level=2] [ref=e42]
+      - paragraph [ref=e44]:
+        - text: Results-driven
+        - strong [ref=e45]: Software IV&V Engineer
+        - text: with 4+ years of experience at
+        - strong [ref=e46]: LRDE (DRDO)
+        - text: through GVR Technolabs Pvt Ltd. Specialized in validation of mission-critical radar and aerospace systems. Strong expertise in system testing, requirement traceability, and software reliability assurance.
+    - generic [ref=e48]:
+      - heading "Experience" [level=2] [ref=e49]
+      - generic [ref=e50]:
+        - generic [ref=e53]:
+          - heading "Software IV&V Engineer" [level=3] [ref=e54]
+          - heading "LRDE (DRDO) via GVR Technolabs" [level=4] [ref=e55]
+          - generic [ref=e56]: Current | 4+ Years
+          - list [ref=e57]:
+            - listitem [ref=e58]: ▹ Performed Independent Verification & Validation (IV&V)
+            - listitem [ref=e59]: ▹ Conducted Black Box testing for radar systems
+            - listitem [ref=e60]: ▹ System & Integration testing of aerospace applications
+            - listitem [ref=e61]: ▹ Requirement Traceability Matrix preparation
+            - listitem [ref=e62]: ▹ Defect logging, test case tracking, and detail validation reporting
+        - generic [ref=e65]:
+          - heading "Software Test Engineer" [level=3] [ref=e66]
+          - heading "Innowyze Global Solutions (The Metromax Group)" [level=4] [ref=e67]
+          - generic [ref=e68]: Nov 2020 – 2024
+          - list [ref=e69]:
+            - listitem [ref=e70]: ▹ Executed automated test scripts and troubleshot failed test scenarios
+            - listitem [ref=e71]: ▹ Worked extensively with Selenium, JMeter, and API Testing tools
+            - listitem [ref=e72]: ▹ Performed White Box, Regression testing, and created test documentation
+            - listitem [ref=e73]: ▹ Collaborated with developers resolving software defects maintaining high precision
+    - generic [ref=e75]:
+      - heading "Technical Expertise" [level=2] [ref=e76]
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - heading "Core Competencies" [level=3] [ref=e80]
+          - paragraph [ref=e81]: Manual Testing, Functional Testing, Regression Testing, Verification & Validation
+        - generic [ref=e82]:
+          - generic [ref=e83]: 
+          - heading "Automation & Tools" [level=3] [ref=e85]
+          - paragraph [ref=e86]: Test Automation, Cucumber, TestNG, Selenium
+        - generic [ref=e87]:
+          - generic [ref=e88]: 
+          - heading "Backend & Data" [level=3] [ref=e90]
+          - paragraph [ref=e91]: API Testing (Postman), SQL, Requirement Analysis
+    - generic [ref=e93]:
+      - heading "Key Projects" [level=2] [ref=e94]
+      - generic [ref=e95]:
+        - generic [ref=e96]:
+          - generic [ref=e97]: 
+          - heading "Web App Framework" [level=3] [ref=e99]
+          - paragraph [ref=e100]: Designed and implemented a complete Data-Driven Automation Framework handling dynamic test data and scalable scripts.
+        - generic [ref=e101]:
+          - generic [ref=e102]: 
+          - heading "Mobile Automation" [level=3] [ref=e104]
+          - paragraph [ref=e105]: Developed full test suites using Appium for Android, enabling functional and regression cross-device validation.
+        - generic [ref=e106]:
+          - generic [ref=e107]: 
+          - heading "API Testing Workflows" [level=3] [ref=e109]
+          - paragraph [ref=e110]: Created and managed Postman collections for integration testing, handling request validation and backend reliability.
+    - generic [ref=e112]:
+      - heading "Get In Touch" [level=2] [ref=e113]
+      - paragraph [ref=e114]: Currently open for new opportunities. Let's connect!
+      - generic [ref=e115]:
+        - generic [ref=e116]:
+          - generic [ref=e117]: 
+          - paragraph [ref=e119]:
+            - link "Veereshsss784@gmail.com" [ref=e120] [cursor=pointer]:
+              - /url: mailto:Veereshsss784@gmail.com
+        - generic [ref=e121]:
+          - generic [ref=e122]: 
+          - paragraph [ref=e124]: Bangalore, India
+  - contentinfo [ref=e125]:
+    - generic [ref=e126]:
+      - generic [ref=e127]: Veeresh.
+      - generic [ref=e128]:
+        - link "LinkedIn" [ref=e129] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/veeresh-salagar-996815156/
+          - generic [ref=e130]: 
+        - link "GitHub" [ref=e131] [cursor=pointer]:
+          - /url: https://github.com/VeereshSalagar
+          - generic [ref=e132]: 
+        - link "" [ref=e133] [cursor=pointer]:
+          - /url: mailto:Veereshsss784@gmail.com
+      - paragraph [ref=e135]: © 2026 Veeresh Salagar. All Rights Reserved.

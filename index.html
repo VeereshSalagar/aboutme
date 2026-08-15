@@ -3,183 +3,197 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Veeresh Salagar - Software IV&V Engineer Portfolio">
 <title>Veeresh Salagar | Software IV&V Engineer</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<!-- Fonts: Inter for reading, Outfit for headings -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
+<!-- FontAwesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
-<canvas id="particles"></canvas>
-<div class="radar"></div>
+<div class="mesh-bg" id="mesh-bg"></div>
 
-<nav>
-  <h2>Veeresh</h2>
-  <ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<section class="hero">
-  <div class="glass">
-    <h1>Veeresh Salagar</h1>
-    <h3><span id="typing"></span></h3>
-
-    <div class="buttons">
-      <a href="resume.pdf" download class="btn">Download Resume</a>
-      <a href="#projects" class="btn">View Projects</a>
-    </div>
-
-    <div class="socials">
-
-    <a href="https://www.linkedin.com/in/veeresh-salagar-996815156/" target="_blank">
-  <i class="fab fa-linkedin-in"></i></a>
-      <a href="https://github.com/VeereshSalagar" target="_blank">
-  <i class="fab fa-github"></i> </a>
-
-  
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="glass">
-    <h2>About Me</h2>
-    <p>
-      Results-driven Software IV&V Engineer with 4+ years of experience at 
-      LRDE (DRDO) through GVR Technolabs Pvt Ltd. Specialized in validation 
-      of mission-critical radar and aerospace systems. Strong expertise in 
-      system testing, requirement traceability, and software reliability assurance.
-    </p>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="glass">
-    <h2>Experience</h2>
-
-    <!-- Current Role -->
-    <h3>Software IV&V Engineer – LRDE (DRDO)</h3>
-    <p><strong>GVR Technolabs Pvt Ltd | 4+ Years</strong></p>
-    <ul>
-      <li>Performed Independent Verification & Validation (IV&V)</li>
-      <li>Conducted Black Box testing for radar systems</li>
-      <li>System & Integration testing of aerospace applications</li>
-      <li>Requirement Traceability Matrix preparation</li>
-      <li>Defect logging and tracking</li>
-      <li>Test case design & execution</li>
-      <li>Generated detailed validation reports</li>
+<header>
+  <nav class="navbar" id="navbar">
+    <a href="#" class="logo">Veeresh.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-
-    <br><br>
-
-    <!-- Previous Role -->
-    <h3>Software Test Engineer – The Metromax Group</h3>
-    <p><strong>Innowyze Global Solutions Pvt. Ltd | Nov 2020 – 2024</strong></p>
-    <ul>
-      <li>Executed automated test scripts and troubleshot failed test scenarios</li>
-      <li>Worked with Selenium, JMeter, and API Testing tools</li>
-      <li>Prepared detailed Test Plans and Test Cases</li>
-      <li>Performed White Box and Regression testing</li>
-      <li>Strong knowledge of SDLC, STLC, and Agile methodologies</li>
-      <li>Wrote clear and concise bug reports and documentation</li>
-      <li>Collaborated with developers to resolve and prevent software defects</li>
-      <li>Maintained Accuracy, Precision, Efficiency, Reliability, Compliance, and customer satisfaction</li>
-    </ul>
-
-  </div>
-</section>
-
-<section id="skills">
-  <div class="glass">
-    <h2>Technical Skills</h2>
-
-    <div class="skill-grid">
-      <div>Manual Testing</div>
-      <div>Functional Testing</div>
-      <div>Regression Testing</div>
-      <div>Verification & Validation</div>
-      <div>Test Automation</div>
-      <div>Cucumber</div>
-      <div>TestNG</div>
-      <div>Requirements Analysis</div>
-      <div>Test Execution</div>
-      <div>SQL</div>
-      <div>Postman (API Testing)</div>
-      <div>HTML</div>
+    <div class="hamburger">
+      <i class="fas fa-bars"></i>
     </div>
+  </nav>
+</header>
 
-  </div>
-</section>
-
-<section id="projects">
-  <div class="glass">
-   <h2>Projects</h2>
-
-<div class="project-card">
-  <h3>Web Application Automation Framework</h3>
-  <p>
-    Designed and implemented a complete Data-Driven Automation Framework 
-    covering all web automation testing concepts. Developed reusable test 
-    scripts, integrated reporting mechanisms, and handled dynamic test data 
-    management for scalable and maintainable automation.
-  </p>
-</div>
-
-<div class="project-card">
-  <h3>Mobile Application Automation – Appium</h3>
-  <p>
-    Developed mobile automation test suites using Appium for Android 
-    applications. Automated functional and regression scenarios, 
-    managed device configurations, and executed cross-device validation.
-  </p>
-</div>
-
-<div class="project-card">
-  <h3>API Testing & Collections</h3>
-  <p>
-    Created and managed API collections for functional and integration testing. 
-    Performed request validation, response verification, and automated API 
-    workflows to ensure backend reliability and performance.
-  </p>
-</div>
-
-  </div>
-</section>
-
-<section id="contact">
-  <div class="glass">
-    <h2>Contact</h2>
-    <p>Email: Veereshsss784@gmail.com</p>
-    <p>Location: Bangalore, India</p>
-  </div>
-</section>
-
-<script src="script.js"></script>
-
-
-<footer class="footer">
-  <div class="footer-container">
-
-    <div class="footer-social">
-      <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="mailto:yourmail@email.com"><i class="fas fa-envelope"></i></a>
+<main>
+  <!-- Hero Section -->
+  <section id="hero" class="hero hidden filter-blur">
+    <div class="hero-content glass-panel">
+      <div class="hero-text">
+        <p class="greeting">Hi, I'm</p>
+        <h1 class="gradient-text">Veeresh Salagar</h1>
+        <h2 class="typing-container"><span id="typing"></span><span class="cursor">|</span></h2>
+        <p class="bio">Validation of mission-critical radar and aerospace systems, specializing in system testing and software reliability assurance.</p>
+        <div class="buttons">
+          <a href="resume.pdf" download class="btn btn-primary">
+            <span>Download Resume</span> <i class="fas fa-download"></i>
+          </a>
+          <a href="#projects" class="btn btn-secondary">
+            <span>View Projects</span> <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/veeresh-salagar-996815156/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/VeereshSalagar" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="hero-image hidden filter-blur delay-200">
+        <div class="image-wrapper">
+          <div class="glow-effect"></div>
+          <img src="headshot.png" alt="Veeresh Salagar Avatar">
+        </div>
+      </div>
     </div>
+  </section>
 
-    <p class="footer-text">
-      © 2026 <span>Veeresh Salagar</span>. All Rights Reserved.
-    </p>
+  <!-- About Section -->
+  <section id="about" class="section hidden">
+    <div class="glass-panel">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <p>Results-driven <strong class="highlight">Software IV&V Engineer</strong> with 4+ years of experience at <strong class="highlight">LRDE (DRDO)</strong> through GVR Technolabs Pvt Ltd. Specialized in validation of mission-critical radar and aerospace systems. Strong expertise in system testing, requirement traceability, and software reliability assurance.</p>
+      </div>
+    </div>
+  </section>
 
+  <!-- Experience Section -->
+  <section id="experience" class="section hidden">
+    <div class="glass-panel">
+      <h2 class="section-title">Experience</h2>
+      <div class="timeline">
+        <!-- Job 1 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content box-hover">
+            <h3>Software IV&V Engineer</h3>
+            <h4>LRDE (DRDO) via GVR Technolabs</h4>
+            <span class="timeline-date">Current | 4+ Years</span>
+            <ul class="task-list">
+              <li>Performed Independent Verification & Validation (IV&V)</li>
+              <li>Conducted Black Box testing for radar systems</li>
+              <li>System & Integration testing of aerospace applications</li>
+              <li>Requirement Traceability Matrix preparation</li>
+              <li>Defect logging, test case tracking, and detail validation reporting</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Job 2 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content box-hover">
+            <h3>Software Test Engineer</h3>
+            <h4>Innowyze Global Solutions (The Metromax Group)</h4>
+            <span class="timeline-date">Nov 2020 – 2024</span>
+            <ul class="task-list">
+              <li>Executed automated test scripts and troubleshot failed test scenarios</li>
+              <li>Worked extensively with Selenium, JMeter, and API Testing tools</li>
+              <li>Performed White Box, Regression testing, and created test documentation</li>
+              <li>Collaborated with developers resolving software defects maintaining high precision</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section hidden">
+    <div class="glass-panel">
+      <h2 class="section-title">Technical Expertise</h2>
+      <div class="skills-grid">
+        <div class="skill-category box-hover">
+          <div class="skill-icon"><i class="fas fa-shield-check"></i></div>
+          <h3>Core Competencies</h3>
+          <p>Manual Testing, Functional Testing, Regression Testing, Verification & Validation</p>
+        </div>
+        <div class="skill-category box-hover">
+          <div class="skill-icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>Automation & Tools</h3>
+          <p>Test Automation, Cucumber, TestNG, Selenium</p>
+        </div>
+        <div class="skill-category box-hover">
+          <div class="skill-icon"><i class="fas fa-server"></i></div>
+          <h3>Backend & Data</h3>
+          <p>API Testing (Postman), SQL, Requirement Analysis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section hidden">
+    <div class="glass-panel">
+      <h2 class="section-title">Key Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card box-hover">
+          <div class="project-icon"><i class="fas fa-code-branch"></i></div>
+          <h3>Web App Framework</h3>
+          <p>Designed and implemented a complete Data-Driven Automation Framework handling dynamic test data and scalable scripts.</p>
+        </div>
+        <div class="project-card box-hover">
+          <div class="project-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Mobile Automation</h3>
+          <p>Developed full test suites using Appium for Android, enabling functional and regression cross-device validation.</p>
+        </div>
+        <div class="project-card box-hover">
+          <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+          <h3>API Testing Workflows</h3>
+          <p>Created and managed Postman collections for integration testing, handling request validation and backend reliability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section hidden">
+    <div class="glass-panel text-center">
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="contact-subtitle">Currently open for new opportunities. Let's connect!</p>
+      
+      <div class="contact-info">
+        <div class="contact-item box-hover">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <p><a href="mailto:Veereshsss784@gmail.com">Veereshsss784@gmail.com</a></p>
+        </div>
+        <div class="contact-item box-hover">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <p>Bangalore, India</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-content glass-panel">
+    <div class="footer-logo">Veeresh.</div>
+    <div class="footer-socials">
+      <a href="https://www.linkedin.com/in/veeresh-salagar-996815156/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/VeereshSalagar" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="mailto:Veereshsss784@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+    <p class="copyright">&copy; 2026 Veeresh Salagar. All Rights Reserved.</p>
   </div>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
