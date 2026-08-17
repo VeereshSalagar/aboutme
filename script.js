@@ -1,3 +1,79 @@
+// Clear any legacy localStorage or mock keys
+try {
+  localStorage.removeItem("portfolio_device_stats");
+} catch (e) {}
+
+const API_BASE_URL = "https://volunteers-backend-35oe.onrender.com";
+
+function detectDeviceType() {
+  const ua = navigator.userAgent;
+  if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+    return "Tablet";
+  }
+  if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/i.test(ua)) {
+    return "Mobile";
+  }
+  return "Desktop";
+}
+
+async function trackAndDisplayDeviceVisits() {
+  const currentDevice = detectDeviceType();
+  const currentDeviceEl = document.getElementById("current-device-type");
+  if (currentDeviceEl) {
+    currentDeviceEl.textContent = currentDevice;
+  }
+
+  const sessionKey = "has_recorded_device_visit";
+  const hasRecordedSession = sessionStorage.getItem(sessionKey);
+
+  try {
+    let stats;
+    if (!hasRecordedSession) {
+      const response = await fetch(`${API_BASE_URL}/api/visits/track?deviceType=${currentDevice}`, {
+        method: "POST"
+      });
+      if (response.ok) {
+        stats = await response.json();
+        sessionStorage.setItem(sessionKey, "true");
+      }
+    }
+
+    if (!stats) {
+      const statsRes = await fetch(`${API_BASE_URL}/api/visits/stats`);
+      if (statsRes.ok) {
+        stats = await statsRes.json();
+      }
+    }
+
+    if (stats) {
+      animateCounter("mobile-count", stats.Mobile || 0);
+      animateCounter("desktop-count", stats.Desktop || 0);
+      animateCounter("tablet-count", stats.Tablet || 0);
+    }
+  } catch (error) {
+    console.error("Backend tracking sync error:", error);
+  }
+}
+
+function animateCounter(elementId, targetNumber) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+
+  let current = 0;
+  const target = Number(targetNumber) || 0;
+  const increment = Math.ceil(target / 25) || 1;
+
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      el.textContent = target;
+      clearInterval(timer);
+    } else {
+      el.textContent = current;
+    }
+  }, 30);
+}
+
 // ===== TYPING EFFECT =====
 const texts = [
   "Software IV&V Engineer",
