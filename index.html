@@ -1,215 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Veeresh Salagar - Software IV&V Engineer Portfolio">
-<title>Veeresh Salagar | Software IV&V Engineer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Veeresh Salagar - Software IV&V Engineer Portfolio">
+  <title>Veeresh Salagar | Software IV&V Engineer</title>
 
-<!-- Fonts: Inter for reading, Outfit for headings -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<!-- FontAwesome for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-<div class="mesh-bg" id="mesh-bg"></div>
+  <div class="mesh-bg" id="mesh-bg"></div>
 
-<header>
-  <nav class="navbar" id="navbar">
-    <a href="#" class="logo">Veeresh.</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="hamburger">
-      <i class="fas fa-bars"></i>
-    </div>
-  </nav>
-</header>
-
-<main>
-  <!-- Hero Section -->
-  <section id="hero" class="hero hidden filter-blur">
-    <div class="hero-content glass-panel">
-      <div class="hero-text">
-        <p class="greeting">Hi, I'm</p>
-        <h1 class="gradient-text">Veeresh Salagar</h1>
-        <h2 class="typing-container"><span id="typing"></span><span class="cursor">|</span></h2>
-        <p class="bio">Validation of mission-critical radar and aerospace systems, specializing in system testing and software reliability assurance.</p>
-        <div class="buttons">
-          <a href="resume.pdf" download class="btn btn-primary">
-            <span>Download Resume</span> <i class="fas fa-download"></i>
-          </a>
-          <a href="#projects" class="btn btn-secondary">
-            <span>View Projects</span> <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-        <div class="socials">
-          <a href="https://www.linkedin.com/in/veeresh-salagar-996815156/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com/VeereshSalagar" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        </div>
+  <header>
+    <nav class="navbar" id="navbar">
+      <a href="#" class="logo">Veeresh.</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-item">About</a></li>
+        <li><a href="#experience" class="nav-item">Experience</a></li>
+        <li><a href="#skills" class="nav-item">Skills</a></li>
+        <li><a href="#projects" class="nav-item">Projects</a></li>
+        <li><a href="#contact" class="nav-item">Contact</a></li>
+        <li><a href="#visitor-invitation" class="nav-item">Visitors</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
       </div>
-      <div class="hero-image hidden filter-blur delay-200">
-        <div class="image-wrapper">
-          <div class="glow-effect"></div>
-          <img src="headshot.png" alt="Veeresh Salagar Avatar">
-        </div>
-      </div>
-    </div>
-  </section>
+    </nav>
+  </header>
 
-  <!-- About Section -->
-  <section id="about" class="section hidden">
-    <div class="glass-panel">
-      <h2 class="section-title">About Me</h2>
-      <div class="about-content">
-        <p>Results-driven <strong class="highlight">Software IV&V Engineer</strong> with 4+ years of experience at <strong class="highlight">LRDE (DRDO)</strong> through GVR Technolabs Pvt Ltd. Specialized in validation of mission-critical radar and aerospace systems. Strong expertise in system testing, requirement traceability, and software reliability assurance.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <section id="experience" class="section hidden">
-    <div class="glass-panel">
-      <h2 class="section-title">Experience</h2>
-      <div class="timeline">
-        <!-- Job 1 -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content box-hover">
-            <h3>Software IV&V Engineer</h3>
-            <h4>LRDE (DRDO) via GVR Technolabs</h4>
-            <span class="timeline-date">Current | 4+ Years</span>
-            <ul class="task-list">
-              <li>Performed Independent Verification & Validation (IV&V)</li>
-              <li>Conducted Black Box testing for radar systems</li>
-              <li>System & Integration testing of aerospace applications</li>
-              <li>Requirement Traceability Matrix preparation</li>
-              <li>Defect logging, test case tracking, and detail validation reporting</li>
-            </ul>
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero hidden filter-blur">
+      <div class="hero-content glass-panel">
+        <div class="hero-text">
+          <p class="greeting">Hi, I'm</p>
+          <h1 class="gradient-text">Veeresh Salagar</h1>
+          <h2 class="typing-container"><span id="typing"></span><span class="cursor">|</span></h2>
+          <p class="bio">Validation of mission-critical radar and aerospace systems, specializing in system testing and software reliability assurance.</p>
+          <div class="buttons">
+            <a href="resume.pdf" download class="btn btn-primary">
+              <span>Download Resume</span> <i class="fas fa-download"></i>
+            </a>
+            <a href="#projects" class="btn btn-secondary">
+              <span>View Projects</span> <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+          <div class="socials">
+            <a href="https://www.linkedin.com/in/veeresh-salagar-996815156/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/VeereshSalagar" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
           </div>
         </div>
-        <!-- Job 2 -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content box-hover">
-            <h3>Software Test Engineer</h3>
-            <h4>Innowyze Global Solutions (The Metromax Group)</h4>
-            <span class="timeline-date">Nov 2020 – 2024</span>
-            <ul class="task-list">
-              <li>Executed automated test scripts and troubleshot failed test scenarios</li>
-              <li>Worked extensively with Selenium, JMeter, and API Testing tools</li>
-              <li>Performed White Box, Regression testing, and created test documentation</li>
-              <li>Collaborated with developers resolving software defects maintaining high precision</li>
-            </ul>
+        <div class="hero-image hidden filter-blur delay-200">
+          <div class="image-wrapper">
+            <div class="glow-effect"></div>
+            <img src="headshot.png" alt="Veeresh Salagar Avatar">
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Skills Section -->
-  <section id="skills" class="section hidden">
-    <div class="glass-panel">
-      <h2 class="section-title">Technical Expertise</h2>
-      <div class="skills-grid">
-        <div class="skill-category box-hover">
-          <div class="skill-icon"><i class="fas fa-shield-check"></i></div>
-          <h3>Core Competencies</h3>
-          <p>Manual Testing, Functional Testing, Regression Testing, Verification & Validation</p>
-        </div>
-        <div class="skill-category box-hover">
-          <div class="skill-icon"><i class="fas fa-laptop-code"></i></div>
-          <h3>Automation & Tools</h3>
-          <p>Test Automation, Cucumber, TestNG, Selenium</p>
-        </div>
-        <div class="skill-category box-hover">
-          <div class="skill-icon"><i class="fas fa-server"></i></div>
-          <h3>Backend & Data</h3>
-          <p>API Testing (Postman), SQL, Requirement Analysis</p>
+    <!-- About Section -->
+    <section id="about" class="section hidden">
+      <div class="glass-panel">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <p>Results-driven <strong class="highlight">Software IV&V Engineer</strong> with 4+ years of experience at <strong class="highlight">LRDE (DRDO)</strong> through GVR Technolabs Pvt Ltd. Specialized in validation of mission-critical radar and aerospace systems. Strong expertise in system testing, requirement traceability, and software reliability assurance.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="section hidden">
-    <div class="glass-panel">
-      <h2 class="section-title">Key Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card box-hover">
-          <div class="project-icon"><i class="fas fa-code-branch"></i></div>
-          <h3>Web App Framework</h3>
-          <p>Designed and implemented a complete Data-Driven Automation Framework handling dynamic test data and scalable scripts.</p>
-        </div>
-        <div class="project-card box-hover">
-          <div class="project-icon"><i class="fas fa-mobile-alt"></i></div>
-          <h3>Mobile Automation</h3>
-          <p>Developed full test suites using Appium for Android, enabling functional and regression cross-device validation.</p>
-        </div>
-        <div class="project-card box-hover">
-          <div class="project-icon"><i class="fas fa-network-wired"></i></div>
-          <h3>API Testing Workflows</h3>
-          <p>Created and managed Postman collections for integration testing, handling request validation and backend reliability.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="section hidden">
-    <div class="glass-panel text-center">
-      <h2 class="section-title">Get In Touch</h2>
-      <p class="contact-subtitle">Currently open for new opportunities. Let's connect!</p>
-      
-      <div class="contact-info">
-        <div class="contact-item box-hover">
-          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-          <p><a href="mailto:Veereshsss784@gmail.com">Veereshsss784@gmail.com</a></p>
-        </div>
-        <div class="contact-item box-hover">
-          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-          <p>Bangalore, India</p>
+    <!-- Experience Section -->
+    <section id="experience" class="section hidden">
+      <div class="glass-panel">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content box-hover">
+              <h3>Software IV&V Engineer</h3>
+              <h4>LRDE (DRDO) via GVR Technolabs</h4>
+              <span class="timeline-date">Current | 4+ Years</span>
+              <ul class="task-list">
+                <li>Performed Independent Verification & Validation (IV&V)</li>
+                <li>Conducted Black Box testing for radar systems</li>
+                <li>System & Integration testing of aerospace applications</li>
+                <li>Requirement Traceability Matrix preparation</li>
+                <li>Defect logging, test case tracking, and detail validation reporting</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content box-hover">
+              <h3>Software Test Engineer</h3>
+              <h4>Innowyze Global Solutions (The Metromax Group)</h4>
+              <span class="timeline-date">Nov 2020 – 2024</span>
+              <ul class="task-list">
+                <li>Executed automated test scripts and troubleshot failed test scenarios</li>
+                <li>Worked extensively with Selenium, JMeter, and API Testing tools</li>
+                <li>Performed White Box, Regression testing, and created test documentation</li>
+                <li>Collaborated with developers resolving software defects maintaining high precision</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Visitor Invitation Section -->
-  <section id="visitor-invitation" class="section hidden">
-    <div class="glass-panel text-center">
-      <h2 class="section-title">May I Know Who Visited?</h2>
-      <p class="contact-subtitle">Thanks for stopping by my portfolio! Leave your details below:</p>
-      
-      <div class="contact-info" style="justify-content: center; margin-top: 25px;">
-        <a href="./visitor/" class="contact-item box-hover" style="text-decoration: none; display: inline-flex; align-items: center; gap: 12px; padding: 12px 28px;">
-          <div class="contact-icon"><i class="fas fa-user-check"></i></div>
-          <span style="font-weight: 600; font-size: 1.05rem; color: #F8F9FA">Leave Your Details</span>
-        </a>
+    <!-- Skills Section -->
+    <section id="skills" class="section hidden">
+      <div class="glass-panel">
+        <h2 class="section-title">Technical Expertise</h2>
+        <div class="skills-grid">
+          <div class="skill-category box-hover">
+            <div class="skill-icon"><i class="fas fa-shield-check"></i></div>
+            <h3>Core Competencies</h3>
+            <p>Manual Testing, Functional Testing, Regression Testing, Verification & Validation</p>
+          </div>
+          <div class="skill-category box-hover">
+            <div class="skill-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>Automation & Tools</h3>
+            <p>Test Automation, Cucumber, TestNG, Selenium</p>
+          </div>
+          <div class="skill-category box-hover">
+            <div class="skill-icon"><i class="fas fa-server"></i></div>
+            <h3>Backend & Data</h3>
+            <p>API Testing (Postman), SQL, Requirement Analysis</p>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section hidden">
+      <div class="glass-panel">
+        <h2 class="section-title">Key Projects</h2>
+        <div class="projects-grid">
+          <div class="project-card box-hover">
+            <div class="project-icon"><i class="fas fa-code-branch"></i></div>
+            <h3>Web App Framework</h3>
+            <p>Designed and implemented a complete Data-Driven Automation Framework handling dynamic test data and scalable scripts.</p>
+          </div>
+          <div class="project-card box-hover">
+            <div class="project-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h3>Mobile Automation</h3>
+            <p>Developed full test suites using Appium for Android, enabling functional and regression cross-device validation.</p>
+          </div>
+          <div class="project-card box-hover">
+            <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+            <h3>API Testing Workflows</h3>
+            <p>Created and managed Postman collections for integration testing, handling request validation and backend reliability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section hidden">
+      <div class="glass-panel text-center">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="contact-subtitle">Currently open for new opportunities. Let's connect!</p>
+        
+        <div class="contact-info">
+          <div class="contact-item box-hover">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <p><a href="mailto:Veereshsss784@gmail.com">Veereshsss784@gmail.com</a></p>
+          </div>
+          <div class="contact-item box-hover">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <p>Bangalore, India</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visitor Invitation & Device Analytics Section -->
+    <section id="visitor-invitation" class="section hidden">
+      <div class="glass-panel text-center">
+        <h2 class="section-title">May I Know Who Visited?</h2>
+        <p class="contact-subtitle">Thanks for stopping by! Here are the total visits tracked across devices:</p>
+        
+        <!-- Live Device Stats Cards -->
+        <div class="device-stats-grid">
+          <div class="stat-card box-hover">
+            <div class="stat-icon"><i class="fas fa-mobile-screen-button"></i></div>
+            <div class="stat-info">
+              <span class="stat-count" id="mobile-count">0</span>
+              <span class="stat-label">Mobile Visits</span>
+            </div>
+          </div>
+
+          <div class="stat-card box-hover">
+            <div class="stat-icon"><i class="fas fa-desktop"></i></div>
+            <div class="stat-info">
+              <span class="stat-count" id="desktop-count">0</span>
+              <span class="stat-label">Desktop Visits</span>
+            </div>
+          </div>
+
+          <div class="stat-card box-hover">
+            <div class="stat-icon"><i class="fas fa-tablet-screen-button"></i></div>
+            <div class="stat-info">
+              <span class="stat-count" id="tablet-count">0</span>
+              <span class="stat-label">Tablet Visits</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="your-device-badge">You are visiting from: <strong id="current-device-type" class="highlight">Detecting...</strong></p>
+
+        <div class="contact-info" style="justify-content: center; margin-top: 25px;">
+          <a href="./visitor/" class="btn btn-primary" style="text-decoration: none;">
+            <i class="fas fa-user-check"></i>
+            <span>Leave Your Details</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content glass-panel">
+      <div class="footer-logo">Veeresh.</div>
+      <div class="footer-socials">
+        <a href="https://www.linkedin.com/in/veeresh-salagar-996815156/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/VeereshSalagar" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:Veereshsss784@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+      <p class="copyright">&copy; 2026 Veeresh Salagar. All Rights Reserved.</p>
     </div>
-  </section>
+  </footer>
 
-</main>
-
-<footer>
-  <div class="footer-content glass-panel">
-    <div class="footer-logo">Veeresh.</div>
-    <div class="footer-socials">
-      <a href="https://www.linkedin.com/in/veeresh-salagar-996815156/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://github.com/VeereshSalagar" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-      <a href="mailto:Veereshsss784@gmail.com"><i class="fas fa-envelope"></i></a>
-    </div>
-    <p class="copyright">&copy; 2026 Veeresh Salagar. All Rights Reserved.</p>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
