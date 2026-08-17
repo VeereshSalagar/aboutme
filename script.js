@@ -1,9 +1,9 @@
-// Clear any legacy localStorage or mock keys
+const API_BASE_URL = "https://volunteers-backend-35oe.onrender.com";
+
+// Clear any outdated local mock cache
 try {
   localStorage.removeItem("portfolio_device_stats");
 } catch (e) {}
-
-const API_BASE_URL = "https://volunteers-backend-35oe.onrender.com";
 
 function detectDeviceType() {
   const ua = navigator.userAgent;
@@ -27,8 +27,10 @@ async function trackAndDisplayDeviceVisits() {
   const hasRecordedSession = sessionStorage.getItem(sessionKey);
 
   try {
-    let stats;
+    let stats = null;
+
     if (!hasRecordedSession) {
+      // 1. First visit in this browser session -> record increment
       const response = await fetch(`${API_BASE_URL}/api/visits/track?deviceType=${currentDevice}`, {
         method: "POST"
       });
@@ -38,6 +40,7 @@ async function trackAndDisplayDeviceVisits() {
       }
     }
 
+    // 2. If already logged in this session or POST returned null, fetch live stats
     if (!stats) {
       const statsRes = await fetch(`${API_BASE_URL}/api/visits/stats`);
       if (statsRes.ok) {
@@ -45,10 +48,11 @@ async function trackAndDisplayDeviceVisits() {
       }
     }
 
+    // 3. Render real database totals
     if (stats) {
-      animateCounter("mobile-count", stats.Mobile || 0);
-      animateCounter("desktop-count", stats.Desktop || 0);
-      animateCounter("tablet-count", stats.Tablet || 0);
+      animateCounter("mobile-count", stats.Mobile ?? 0);
+      animateCounter("desktop-count", stats.Desktop ?? 0);
+      animateCounter("tablet-count", stats.Tablet ?? 0);
     }
   } catch (error) {
     console.error("Backend tracking sync error:", error);
@@ -72,6 +76,12 @@ function animateCounter(elementId, targetNumber) {
       el.textContent = current;
     }
   }, 30);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", trackAndDisplayDeviceVisits);
+} else {
+  trackAndDisplayDeviceVisits();
 }
 
 // ===== TYPING EFFECT =====
