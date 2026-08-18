@@ -1,10 +1,55 @@
 const API_BASE_URL = "https://volunteers-backend-35oe.onrender.com";
 
-// Clear any outdated local mock cache
+// Clear outdated local storage mock stats
 try {
   localStorage.removeItem("portfolio_device_stats");
 } catch (e) {}
 
+// ===== TYPEWRITER EFFECT =====
+function initTypewriter() {
+  const typingEl = document.getElementById("typing");
+  if (!typingEl) return;
+
+  const roles = [
+    "Software IV&V Engineer",
+    "Radar System Validation Specialist",
+    "Black Box Testing Expert",
+    "Java & Automation Enthusiast"
+  ];
+  let count = 0;
+  let index = 0;
+  let isDeleting = false;
+
+  function type() {
+    if (count >= roles.length) count = 0;
+    const currentText = roles[count];
+
+    if (isDeleting) {
+      typingEl.textContent = currentText.substring(0, index - 1);
+      index--;
+    } else {
+      typingEl.textContent = currentText.substring(0, index + 1);
+      index++;
+    }
+
+    let speed = isDeleting ? 40 : 80;
+
+    if (!isDeleting && index === currentText.length) {
+      speed = 2000;
+      isDeleting = true;
+    } else if (isDeleting && index === 0) {
+      isDeleting = false;
+      count++;
+      speed = 400;
+    }
+
+    setTimeout(type, speed);
+  }
+
+  type();
+}
+
+// ===== DEVICE DETECTION & LIVE API TRACKING =====
 function detectDeviceType() {
   const ua = navigator.userAgent;
   if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
@@ -30,7 +75,6 @@ async function trackAndDisplayDeviceVisits() {
     let stats = null;
 
     if (!hasRecordedSession) {
-      // 1. First visit in this browser session -> record increment
       const response = await fetch(`${API_BASE_URL}/api/visits/track?deviceType=${currentDevice}`, {
         method: "POST"
       });
@@ -40,7 +84,6 @@ async function trackAndDisplayDeviceVisits() {
       }
     }
 
-    // 2. If already logged in this session or POST returned null, fetch live stats
     if (!stats) {
       const statsRes = await fetch(`${API_BASE_URL}/api/visits/stats`);
       if (statsRes.ok) {
@@ -48,7 +91,6 @@ async function trackAndDisplayDeviceVisits() {
       }
     }
 
-    // 3. Render real database totals
     if (stats) {
       animateCounter("mobile-count", stats.Mobile ?? 0);
       animateCounter("desktop-count", stats.Desktop ?? 0);
@@ -58,6 +100,10 @@ async function trackAndDisplayDeviceVisits() {
     console.error("Backend tracking sync error:", error);
   }
 }
+
+// Make accessible to console
+window.trackAndDisplayDeviceVisits = trackAndDisplayDeviceVisits;
+window.detectDeviceType = detectDeviceType;
 
 function animateCounter(elementId, targetNumber) {
   const el = document.getElementById(elementId);
@@ -78,76 +124,19 @@ function animateCounter(elementId, targetNumber) {
   }, 30);
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", trackAndDisplayDeviceVisits);
-} else {
+// ===== DOM INITIALIZATION =====
+function initApp() {
+  initTypewriter();
   trackAndDisplayDeviceVisits();
-}
 
-// ===== TYPING EFFECT =====
-const texts = [
-  "Software IV&V Engineer",
-  "Radar System Validation Specialist",
-  "Black Box Testing Expert",
-  "Java & Automation Enthusiast"
-];
-
-let count = 0;
-let index = 0;
-let currentText = "";
-let letter = "";
-let isDeleting = false;
-
-function type() {
-  const typingEl = document.getElementById("typing");
-  if (!typingEl) return;
-
-  if (count === texts.length) {
-    count = 0;
-  }
-
-  currentText = texts[count];
-
-  if (isDeleting) {
-    letter = currentText.slice(0, --index);
-  } else {
-    letter = currentText.slice(0, ++index);
-  }
-
-  typingEl.textContent = letter;
-
-  let typeSpeed = 80;
-
-  if (isDeleting) {
-    typeSpeed /= 2;
-  }
-
-  if (!isDeleting && letter.length === currentText.length) {
-    typeSpeed = 2000; // Pause at end
-    isDeleting = true;
-  } else if (isDeleting && letter.length === 0) {
-    isDeleting = false;
-    count++;
-    typeSpeed = 500; // Pause before next string
-  }
-
-  setTimeout(type, typeSpeed);
-}
-
-// Initialize on DOM ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", type);
-} else {
-  type();
-}
-
-  // ===== MOBILE HAMBURGER MENU TOGGLE =====
+  // Mobile Hamburger Toggle
   const hamburger = document.getElementById("hamburger");
   const navLinksContainer = document.getElementById("navLinks");
   const navItems = document.querySelectorAll(".nav-links a");
 
   if (hamburger && navLinksContainer) {
-    hamburger.addEventListener("click", () => {
+    hamburger.addEventListener("click", (e) => {
+      e.stopPropagation();
       navLinksContainer.classList.toggle("active");
       const icon = hamburger.querySelector("i");
       if (icon) {
@@ -156,7 +145,6 @@ if (document.readyState === "loading") {
       }
     });
 
-    // Close menu automatically when clicking any link
     navItems.forEach((link) => {
       link.addEventListener("click", () => {
         navLinksContainer.classList.remove("active");
@@ -169,9 +157,30 @@ if (document.readyState === "loading") {
     });
   }
 
+  // Intersection Observer for Scroll Animations
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          entry.target.classList.remove("hidden");
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  document.querySelectorAll(".hidden, .section, .hero").forEach((el) => observer.observe(el));
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
+}
+
 // ===== NAVBAR SCROLL EFFECT =====
 const navbar = document.getElementById("navbar");
-
 window.addEventListener("scroll", () => {
   if (navbar) {
     if (window.scrollY > 50) {
@@ -182,31 +191,12 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// ===== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS =====
-const observerOptions = {
-  root: null,
-  rootMargin: "0px",
-  threshold: 0.15
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
-  });
-}, observerOptions);
-
-const hiddenElements = document.querySelectorAll(".hidden");
-hiddenElements.forEach((el) => observer.observe(el));
-
 // ===== ACTIVE NAVIGATION HIGHLIGHT =====
 const sections = document.querySelectorAll(".section, .hero");
 const navLinks = document.querySelectorAll(".nav-links a");
 
 window.addEventListener("scroll", () => {
   let current = "";
-
   sections.forEach((section) => {
     const sectionTop = section.offsetTop;
     if (window.scrollY >= sectionTop - 200) {
