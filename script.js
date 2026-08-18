@@ -135,8 +135,11 @@ function type() {
 }
 
 // Initialize on DOM ready
-document.addEventListener("DOMContentLoaded", () => {
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", type);
+} else {
   type();
+}
 
   // ===== MOBILE HAMBURGER MENU TOGGLE =====
   const hamburger = document.getElementById("hamburger");
@@ -165,10 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-
-  // ===== DEVICE ANALYTICS TRACKER =====
-  trackAndDisplayDeviceVisits();
-});
 
 // ===== NAVBAR SCROLL EFFECT =====
 const navbar = document.getElementById("navbar");
@@ -222,60 +221,3 @@ window.addEventListener("scroll", () => {
     }
   });
 });
-
-// ===== DEVICE DETECTION & COUNTERS =====
-function detectDeviceType() {
-  const ua = navigator.userAgent;
-  if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-    return "Tablet";
-  }
-  if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/i.test(ua)) {
-    return "Mobile";
-  }
-  return "Desktop";
-}
-
-function trackAndDisplayDeviceVisits() {
-  const currentDevice = detectDeviceType();
-  const currentDeviceEl = document.getElementById("current-device-type");
-  if (currentDeviceEl) {
-    currentDeviceEl.textContent = currentDevice;
-  }
-
-  // Load existing data or set default base counts
-  let stats = JSON.parse(localStorage.getItem("portfolio_device_stats")) || {
-    Mobile: 42,
-    Desktop: 68,
-    Tablet: 9
-  };
-
-  // Increment visit once per browser session
-  const sessionKey = "has_logged_visit_session";
-  if (!sessionStorage.getItem(sessionKey)) {
-    stats[currentDevice] = (stats[currentDevice] || 0) + 1;
-    localStorage.setItem("portfolio_device_stats", JSON.stringify(stats));
-    sessionStorage.setItem(sessionKey, "true");
-  }
-
-  // Animate count numbers
-  animateCounter("mobile-count", stats.Mobile);
-  animateCounter("desktop-count", stats.Desktop);
-  animateCounter("tablet-count", stats.Tablet);
-}
-
-function animateCounter(elementId, targetNumber) {
-  const el = document.getElementById(elementId);
-  if (!el) return;
-
-  let current = 0;
-  const increment = Math.ceil(targetNumber / 30) || 1;
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= targetNumber) {
-      el.textContent = targetNumber;
-      clearInterval(timer);
-    } else {
-      el.textContent = current;
-    }
-  }, 35);
-}

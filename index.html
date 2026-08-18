@@ -15,6 +15,71 @@
   <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
+<script>
+  const API_BASE_URL = "https://volunteers-backend-35oe.onrender.com";
+
+  function detectDeviceType() {
+    const ua = navigator.userAgent;
+    if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+      return "Tablet";
+    }
+    if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/i.test(ua)) {
+      return "Mobile";
+    }
+    return "Desktop";
+  }
+
+  async function syncDeviceAnalytics() {
+    const currentDevice = detectDeviceType();
+    const currentDeviceEl = document.getElementById("current-device-type");
+    if (currentDeviceEl) {
+      currentDeviceEl.textContent = currentDevice;
+    }
+
+    const sessionKey = "has_recorded_device_visit";
+    const hasRecorded = sessionStorage.getItem(sessionKey);
+
+    try {
+      let stats = null;
+
+      // 1. If not recorded in this session, increment in Neon DB via Spring Boot
+      if (!hasRecorded) {
+        const response = await fetch(`${API_BASE_URL}/api/visits/track?deviceType=${currentDevice}`, {
+          method: "POST"
+        });
+        if (response.ok) {
+          stats = await response.json();
+          sessionStorage.setItem(sessionKey, "true");
+        }
+      }
+
+      // 2. Fetch the latest live database counts
+      if (!stats) {
+        const statsRes = await fetch(`${API_BASE_URL}/api/visits/stats`);
+        if (statsRes.ok) {
+          stats = await statsRes.json();
+        }
+      }
+
+      // 3. Update the UI directly from database records
+      if (stats) {
+        document.getElementById("mobile-count").textContent = stats.Mobile ?? 0;
+        document.getElementById("desktop-count").textContent = stats.Desktop ?? 0;
+        document.getElementById("tablet-count").textContent = stats.Tablet ?? 0;
+      }
+    } catch (error) {
+      console.error("Device tracking sync error:", error);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", syncDeviceAnalytics);
+  } else {
+    syncDeviceAnalytics();
+  }
+</script>
+
 <body>
   <div class="mesh-bg" id="mesh-bg"></div>
 
@@ -183,47 +248,46 @@
 
     <!-- Visitor Invitation & Device Analytics Section -->
     <section id="visitor-invitation" class="section hidden">
-      <div class="glass-panel text-center">
-        <h2 class="section-title">May I Know Who Visited?</h2>
-        <p class="contact-subtitle">Thanks for stopping by! Here are the total visits tracked across devices:</p>
-        
-        <!-- Live Device Stats Cards -->
-        <div class="device-stats-grid">
-          <div class="stat-card box-hover">
-            <div class="stat-icon"><i class="fas fa-mobile-screen-button"></i></div>
-            <div class="stat-info">
-              <span class="stat-count" id="mobile-count">0</span>
-              <span class="stat-label">Mobile Visits</span>
-            </div>
-          </div>
-
-          <div class="stat-card box-hover">
-            <div class="stat-icon"><i class="fas fa-desktop"></i></div>
-            <div class="stat-info">
-              <span class="stat-count" id="desktop-count">0</span>
-              <span class="stat-label">Desktop Visits</span>
-            </div>
-          </div>
-
-          <div class="stat-card box-hover">
-            <div class="stat-icon"><i class="fas fa-tablet-screen-button"></i></div>
-            <div class="stat-info">
-              <span class="stat-count" id="tablet-count">0</span>
-              <span class="stat-label">Tablet Visits</span>
-            </div>
-          </div>
-        </div>
-
-        <p class="your-device-badge">You are visiting from: <strong id="current-device-type" class="highlight">Detecting...</strong></p>
-
-        <div class="contact-info" style="justify-content: center; margin-top: 25px;">
-          <a href="./visitor/" class="btn btn-primary" style="text-decoration: none;">
-            <i class="fas fa-user-check"></i>
-            <span>Leave Your Details</span>
-          </a>
+  <div class="glass-panel text-center">
+    <h2 class="section-title">May I Know Who Visited?</h2>
+    <p class="contact-subtitle">Thanks for stopping by! Here are the total visits tracked across devices:</p>
+    
+    <div class="device-stats-grid">
+      <div class="stat-card box-hover">
+        <div class="stat-icon"><i class="fas fa-mobile-screen-button"></i></div>
+        <div class="stat-info">
+          <span class="stat-count" id="mobile-count">0</span>
+          <span class="stat-label">Mobile Visits</span>
         </div>
       </div>
-    </section>
+
+      <div class="stat-card box-hover">
+        <div class="stat-icon"><i class="fas fa-desktop"></i></div>
+        <div class="stat-info">
+          <span class="stat-count" id="desktop-count">0</span>
+          <span class="stat-label">Desktop Visits</span>
+        </div>
+      </div>
+
+      <div class="stat-card box-hover">
+        <div class="stat-icon"><i class="fas fa-tablet-screen-button"></i></div>
+        <div class="stat-info">
+          <span class="stat-count" id="tablet-count">0</span>
+          <span class="stat-label">Tablet Visits</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="your-device-badge">You are visiting from: <strong id="current-device-type" class="highlight">Detecting...</strong></p>
+
+    <div class="contact-info" style="justify-content: center; margin-top: 25px;">
+      <a href="./visitor/" class="btn btn-primary" style="text-decoration: none;">
+        <i class="fas fa-user-check"></i>
+        <span>Leave Your Details</span>
+      </a>
+    </div>
+  </div>
+</section>
   </main>
 
   <footer>
