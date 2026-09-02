@@ -11,10 +11,12 @@ function initTypewriter() {
   if (!typingEl) return;
 
   const roles = [
+    "Playwright + TypeScript Automation Test Engineer",
+    "Automation Test Engineer",
+    "Web & API Automation Engineer",
     "Software IV&V Engineer",
-    "Radar System Validation Specialist",
     "Black Box Testing Expert",
-    "Java & Automation Enthusiast"
+    "Software Test Engineer",
   ];
   let count = 0;
   let index = 0;
@@ -210,4 +212,43 @@ window.addEventListener("scroll", () => {
       link.classList.add("active");
     }
   });
+});
+
+// ===============================
+// Dark / Light Mode Toggle
+// ===============================
+
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = themeToggle.querySelector("i");
+
+// Apply saved theme when page loads
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "light") {
+  document.body.classList.add("light-mode");
+  themeIcon.classList.remove("fa-moon");
+  themeIcon.classList.add("fa-sun");
+}
+
+// Toggle theme when button is clicked
+themeToggle.addEventListener("click", () => {
+
+  document.body.classList.toggle("light-mode");
+
+  if (document.body.classList.contains("light-mode")) {
+
+    // Light Mode
+    themeIcon.classList.remove("fa-moon");
+    themeIcon.classList.add("fa-sun");
+
+    localStorage.setItem("theme", "light");
+
+  } else {
+
+    // Dark Mode
+    themeIcon.classList.remove("fa-sun");
+    themeIcon.classList.add("fa-moon");
+
+    localStorage.setItem("theme", "dark");
+  }
 });

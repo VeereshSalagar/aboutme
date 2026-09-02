@@ -12,6 +12,42 @@
   --font-heading: 'Outfit', sans-serif;
 }
 
+/* ===== Light Mode ===== */
+body.light-mode {
+  --bg-color: #f5f7fa;
+  --surface: rgba(255, 255, 255, 0.75);
+  --surface-hover: rgba(255, 255, 255, 0.95);
+  --surface-border: rgba(0, 0, 0, 0.10);
+
+  --primary: #0077b6;
+  --primary-glow: rgba(0, 119, 182, 0.25);
+  --secondary: #3a7bd5;
+
+  --text-main: #17202a;
+  --text-muted: #5f6b76;
+}
+
+/* Light Mode - Header */
+body.light-mode .navbar {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Light Mode - Navigation text */
+body.light-mode .nav-item {
+  color: #17202a;
+}
+
+/* Light Mode - Navigation hover */
+body.light-mode .nav-item:hover {
+  color: var(--primary);
+}
+
+/* Light Mode - Logo */
+body.light-mode .logo {
+  color: #17202a;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -631,7 +667,7 @@ footer {
     left: 0;
     width: 100%;
     height: auto;
-    background: rgba(5, 5, 8, 0.96);
+    background: #050508;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
@@ -645,6 +681,10 @@ footer {
     transition: transform 0.35s ease, opacity 0.3s ease;
     z-index: 999;
   }
+
+  body.light-mode .nav-links {
+  background: #ffffff;
+}
 
   .nav-links.active {
     transform: translateY(0);
