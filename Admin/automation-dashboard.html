@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automation Dashboard | Glassmorphism</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js CDN for charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-color: #050508;
+      --surface: rgba(255, 255, 255, 0.03);
+      --surface-hover: rgba(255, 255, 255, 0.06);
+      --surface-border: rgba(255, 255, 255, 0.08);
+      --primary: #00d2ff;
+      --primary-glow: rgba(0, 210, 255, 0.4);
+      --secondary: #3a7bd5;
+      --text-main: #f8f9fa;
+      --text-muted: #9ca3af;
+      --font-sans: 'Inter', sans-serif;
+      --font-heading: 'Outfit', sans-serif;
+      --accent-green: #22c55e;
+      --accent-red: #ef4444;
+      --accent-yellow: #eab308;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 30px 20px;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(58, 123, 213, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(0, 210, 255, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(58, 123, 213, 0.1) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(0, 210, 255, 0.1) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .glass-card {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--surface-border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .dashboard-header h1 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .dashboard-header p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .btn-refresh {
+      background: rgba(0, 210, 255, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-refresh:hover {
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 0 15px var(--primary-glow);
+      transform: translateY(-2px);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .metric-card {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .metric-card h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .metric-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-family: var(--font-heading);
+    }
+
+    .metric-value.blue { color: var(--primary); }
+    .metric-value.green { color: var(--accent-green); }
+    .metric-value.red { color: var(--accent-red); }
+    .metric-value.yellow { color: var(--accent-yellow); }
+
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .charts-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chart-box {
+      height: 240px;
+      position: relative;
+    }
+
+    .table-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--surface-border);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .data-table th {
+      padding: 14px 18px;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      color: var(--primary);
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid var(--surface-border);
+      text-transform: uppercase;
+    }
+
+    .data-table td {
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--surface-border);
+    }
+
+    .data-table tbody tr {
+      transition: background 0.2s ease;
+    }
+
+    .data-table tbody tr:hover {
+      background: var(--surface-hover);
+    }
+
+    .status-badge {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-block;
+      border: 1px solid transparent;
+    }
+
+    .status-badge.passed {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--accent-green);
+      border-color: rgba(34, 197, 94, 0.3);
+    }
+
+    .status-badge.failed {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--accent-red);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-view {
+      background: rgba(58, 123, 213, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(58, 123, 213, 0.3);
+      padding: 5px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .btn-view:hover {
+      background: var(--primary);
+      color: #000;
+    }
+
+    .table-status-cell {
+      text-align: center;
+      padding: 30px;
+      color: var(--text-muted);
+    }
+
+    /* Modal Popup Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(5, 5, 8, 0.8);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #0d0e15;
+      border: 1px solid var(--surface-border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 950px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--surface-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: var(--text-main);
+    }
+
+    .modal-top-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .modal-top-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    <!-- Header -->
+    <header class="glass-card dashboard-header">
+      <div>
+        <h1>🧪 Automation Dashboard</h1>
+        <p>Portfolio Automation • Playwright • QA • main</p>
+      </div>
+      <button class="btn-refresh" onclick="loadDashboardData()">
+        <i class="fa-solid fa-rotate"></i> Refresh
+      </button>
+    </header>
+
+    <!-- Summary KPI Cards -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <h3>Total Runs</h3>
+        <div class="metric-value blue" id="cardTotalRuns">0</div>
+      </div>
+      <div class="metric-card">
+        <h3>Total Tests</h3>
+        <div class="metric-value" id="cardTotalTests">0</div>
+      </div>
+      <div class="metric-card">
+        <h3>Passed Tests</h3>
+        <div class="metric-value green" id="cardPassedTests">0</div>
+      </div>
+      <div class="metric-card">
+        <h3>Failed Tests</h3>
+        <div class="metric-value red" id="cardFailedTests">0</div>
+      </div>
+      <div class="metric-card">
+        <h3>Skipped Tests</h3>
+        <div class="metric-value yellow" id="cardSkippedTests">0</div>
+      </div>
+      <div class="metric-card">
+        <h3>Overall Pass Rate</h3>
+        <div class="metric-value blue" id="cardPassRate">0%</div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="charts-row">
+      <div class="glass-card">
+        <h3 style="font-family: var(--font-heading); margin-bottom: 15px;">Test Execution Trend (Runs)</h3>
+        <div class="chart-box">
+          <canvas id="trendChart"></canvas>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <h3 style="font-family: var(--font-heading); margin-bottom: 15px;">Execution Summary Breakdown</h3>
+        <div class="chart-box">
+          <canvas id="breakdownChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Test History Table -->
+    <div class="glass-card">
+      <div class="table-toolbar">
+        <div>
+          <h3 style="font-family: var(--font-heading);">Test History</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Click "View Run" to inspect metrics & individual test results in a popup</p>
+        </div>
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Run ID</th>
+              <th>Project</th>
+              <th>Branch</th>
+              <th>Environment</th>
+              <th>Status</th>
+              <th>Pass Rate</th>
+              <th>Duration</th>
+              <th>Trigger</th>
+              <th>Started</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody">
+            <tr><td colspan="10" class="table-status-cell">Loading execution history...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Popup for Run Details & Individual Test Results -->
+  <div class="modal-overlay" id="runModal">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 1.3rem;" id="modalTitle">Run Details</h2>
+          <p style="color: var(--text-muted); font-size: 0.85rem;" id="modalSubtitle">Execution metrics and test results</p>
+        </div>
+        <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="modal-top-grid">
+          <!-- Run Metadata Summary inside Modal -->
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; font-size: 0.9rem; background: rgba(255,255,255,0.02); padding: 16px; border-radius: 12px; border: 1px solid var(--surface-border); align-content: center;">
+            <div><span style="color: var(--text-muted);">Status:</span> <br><strong id="modalStatus">-</strong></div>
+            <div><span style="color: var(--text-muted);">Pass Rate:</span> <br><strong id="modalPassRate">-</strong></div>
+            <div><span style="color: var(--text-muted);">Passed/Total:</span> <br><strong id="modalTestsCount">-</strong></div>
+            <div><span style="color: var(--text-muted);">Duration:</span> <br><strong id="modalDuration">-</strong></div>
+            <div><span style="color: var(--text-muted);">Environment:</span> <br><strong id="modalEnv">-</strong></div>
+            <div><span style="color: var(--text-muted);">Branch:</span> <br><strong id="modalBranch">-</strong></div>
+          </div>
+
+          <!-- Doughnut Chart for Test Result inside Modal -->
+          <div style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 12px; border: 1px solid var(--surface-border); display: flex; align-items: center; justify-content: center; height: 160px;">
+            <canvas id="modalDonutChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Individual Test Results Table inside Modal -->
+        <div>
+          <div class="table-toolbar" style="margin-bottom: 12px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1rem;">Individual Test Results</h3>
+            <input type="text" class="search-input" id="modalSearchFilter" placeholder="🔍 Search test name..." onkeyup="filterModalResults()" style="width: 240px; padding: 6px 12px; font-size: 0.85rem;">
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Test Name</th>
+                  <th>Suite</th>
+                  <th>Status</th>
+                  <th>Duration</th>
+                  <th>Browser</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="modalResultsBody">
+                <tr><td colspan="6" class="table-status-cell">Loading test results...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const RUNS_API = "http://localhost:8081/api/automation/runs";
+    let testRunsData = [];
+    let currentModalResults = [];
+    let trendChartInstance = null;
+    let breakdownChartInstance = null;
+    let modalDonutInstance = null;
+
+    // Helper to clean up random hash strings into clean browser names
+    function getCleanBrowserName(browserStr) {
+      if (!browserStr) return "Chromium";
+      const lower = browserStr.toLowerCase();
+      if (lower.includes("firefox")) return "Firefox";
+      if (lower.includes("webkit") || lower.includes("safari")) return "WebKit";
+      if (lower.includes("chromium") || lower.includes("chrome")) return "Chromium";
+      
+      // If it's a random hash string from Playwright workers, map based on known characteristics or default fallback
+      if (browserStr.length > 12) {
+        return "Chromium"; // Default clean fallback for internal worker hashes
+      }
+      return browserStr;
+    }
+
+    async function loadDashboardData() {
+      const refreshBtn = document.querySelector(".btn-refresh i");
+      if (refreshBtn) refreshBtn.classList.add("fa-spin");
+
+      try {
+        const response = await fetch(RUNS_API);
+        if (!response.ok) throw new Error("Failed to fetch runs from Spring Boot");
+        const runs = await response.json();
+
+        testRunsData = Array.isArray(runs) ? runs : [];
+
+        if (testRunsData.length === 0) {
+          document.getElementById("historyTableBody").innerHTML = `<tr><td colspan="10" class="table-status-cell">No test runs found in database. Run Playwright tests!</td></tr>`;
+          return;
+        }
+
+        testRunsData.sort((a, b) => (a.id || 0) - (b.id || 0));
+
+        const totalRunsCount = testRunsData.length;
+        const totalTestsSum = testRunsData.reduce((acc, r) => acc + (r.totalTests || 0), 0);
+        const passedTestsSum = testRunsData.reduce((acc, r) => acc + (r.passedTests || 0), 0);
+        const failedTestsSum = testRunsData.reduce((acc, r) => acc + (r.failedTests || 0), 0);
+        const skippedTestsSum = testRunsData.reduce((acc, r) => acc + (r.skippedTests || 0), 0);
+        const overallPassRateVal = totalTestsSum > 0 ? ((passedTestsSum / totalTestsSum) * 100).toFixed(1) : 0;
+
+        document.getElementById("cardTotalRuns").innerText = totalRunsCount;
+        document.getElementById("cardTotalTests").innerText = totalTestsSum;
+        document.getElementById("cardPassedTests").innerText = passedTestsSum;
+        document.getElementById("cardFailedTests").innerText = failedTestsSum;
+        document.getElementById("cardSkippedTests").innerText = skippedTestsSum;
+        document.getElementById("cardPassRate").innerText = overallPassRateVal + "%";
+
+        renderHistoryTable([...testRunsData].reverse());
+        renderTrendChart(testRunsData);
+        renderBreakdownChart(totalRunsCount, passedTestsSum, failedTestsSum, skippedTestsSum);
+
+      } catch (error) {
+        console.error("Error loading dashboard data:", error);
+        document.getElementById("historyTableBody").innerHTML = `<tr><td colspan="10" class="table-status-cell" style="color: var(--accent-red);">Error connecting to Spring Boot backend on port 8081.</td></tr>`;
+      } finally {
+        if (refreshBtn) refreshBtn.classList.remove("fa-spin");
+      }
+    }
+
+    function renderHistoryTable(runs) {
+      const tbody = document.getElementById("historyTableBody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+
+      runs.forEach(run => {
+        const statusLower = (run.status || 'passed').toLowerCase();
+        const durationSecs = run.duration ? (run.duration / 1000).toFixed(1) + "s" : "0s";
+        
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>#${run.id}</strong></td>
+          <td>${run.projectName || 'Portfolio Automation'}</td>
+          <td>${run.branch || 'main'}</td>
+          <td>${run.environment || 'QA'}</td>
+          <td><span class="status-badge ${statusLower}">${run.status || 'PASSED'}</span></td>
+          <td><strong>${run.passRate !== undefined ? run.passRate : 0}%</strong></td>
+          <td>${durationSecs}</td>
+          <td>${run.triggerType || 'Local Manual'}</td>
+          <td>${run.startedAt ? run.startedAt.replace('T', ' ') : 'N/A'}</td>
+          <td><button class="btn-view" onclick="openRunModal(${run.id})">View Run</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderTrendChart(runs) {
+      const ctx = document.getElementById('trendChart').getContext('2d');
+      const labels = runs.map(r => `Run #${r.id}`);
+      const passedData = runs.map(r => r.passedTests || 0);
+      const failedData = runs.map(r => r.failedTests || 0);
+
+      if (trendChartInstance) trendChartInstance.destroy();
+
+      trendChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Passed Tests',
+              data: passedData,
+              borderColor: '#22c55e',
+              backgroundColor: 'rgba(34, 197, 94, 0.1)',
+              borderWidth: 2,
+              tension: 0.3,
+              fill: true
+            },
+            {
+              label: 'Failed Tests',
+              data: failedData,
+              borderColor: '#ef4444',
+              backgroundColor: 'rgba(239, 68, 68, 0.1)',
+              borderWidth: 2,
+              tension: 0.3,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: '#f8f9fa', font: { family: 'Inter' } } }
+          },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' }, title: { display: true, text: 'Number of Tests', color: '#00d2ff' } }
+          }
+        }
+      });
+    }
+
+    function renderBreakdownChart(totalRuns, totalPass, totalFail, totalSkip) {
+      const ctx = document.getElementById('breakdownChart').getContext('2d');
+
+      if (breakdownChartInstance) breakdownChartInstance.destroy();
+
+      breakdownChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Total Runs', 'Total Passed', 'Total Failed', 'Total Skipped'],
+          datasets: [{
+            label: 'Execution Breakdown',
+            data: [totalRuns, totalPass, totalFail, totalSkip],
+            backgroundColor: ['#3a7bd5', '#22c55e', '#ef4444', '#eab308'],
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { color: '#9ca3af' } },
+            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } }
+          }
+        }
+      });
+    }
+
+    async function openRunModal(runId) {
+      const selectedRun = testRunsData.find(r => r.id === runId);
+      if (!selectedRun) return;
+
+      document.getElementById("modalTitle").innerText = `Run #${selectedRun.id} Details`;
+      document.getElementById("modalSubtitle").innerText = `${selectedRun.projectName || 'Portfolio Automation'} • ${selectedRun.startedAt ? selectedRun.startedAt.replace('T', ' ') : ''}`;
+      
+      const statusLower = (selectedRun.status || 'passed').toLowerCase();
+      document.getElementById("modalStatus").innerHTML = `<span class="status-badge ${statusLower}">${selectedRun.status}</span>`;
+      document.getElementById("modalPassRate").innerText = (selectedRun.passRate !== undefined ? selectedRun.passRate : 0) + "%";
+      document.getElementById("modalTestsCount").innerText = `${selectedRun.passedTests || 0} / ${selectedRun.totalTests || 0}`;
+      document.getElementById("modalDuration").innerText = selectedRun.duration ? (selectedRun.duration / 1000).toFixed(1) + "s" : "0s";
+      document.getElementById("modalEnv").innerText = selectedRun.environment || "QA";
+      document.getElementById("modalBranch").innerText = selectedRun.branch || "main";
+
+      renderModalDonutChart(selectedRun.passedTests || 0, selectedRun.failedTests || 0, selectedRun.skippedTests || 0);
+
+      document.getElementById("runModal").style.display = "flex";
+      document.getElementById("modalResultsBody").innerHTML = `<tr><td colspan="6" class="table-status-cell">Loading test results for Run #${runId}...</td></tr>`;
+
+      try {
+        const response = await fetch(`http://localhost:8081/api/automation/runs/${runId}/results`);
+        if (response.ok) {
+          currentModalResults = await response.json();
+          renderModalTable(currentModalResults);
+        } else {
+          currentModalResults = [];
+          renderModalTable([]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch test results:", err);
+        currentModalResults = [];
+        renderModalTable([]);
+      }
+    }
+
+    function renderModalDonutChart(passed, failed, skipped) {
+      const ctx = document.getElementById('modalDonutChart').getContext('2d');
+      if (modalDonutInstance) modalDonutInstance.destroy();
+
+      modalDonutInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Passed', 'Failed', 'Skipped'],
+          datasets: [{
+            data: [passed, failed, skipped],
+            backgroundColor: ['#22c55e', '#ef4444', '#eab308'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: { color: '#f8f9fa', font: { family: 'Inter', size: 11 }, boxWidth: 12 }
+            }
+          }
+        }
+      });
+    }
+
+    function closeModal() {
+      document.getElementById("runModal").style.display = "none";
+    }
+
+    function renderModalTable(results) {
+      const tbody = document.getElementById("modalResultsBody");
+      tbody.innerHTML = "";
+
+      if (results.length > 0) {
+        results.forEach(r => {
+          const statusLower = (r.status || 'passed').toLowerCase();
+          const cleanBrowser = getCleanBrowserName(r.browser);
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><strong>${r.testName || 'Unnamed Test'}</strong></td>
+            <td>${r.suiteName || 'Default Suite'}</td>
+            <td><span class="status-badge ${statusLower}">${r.status || 'PASSED'}</span></td>
+            <td>${r.duration ? (r.duration < 1000 ? r.duration + 'ms' : (r.duration / 1000).toFixed(1) + 's') : '0s'}</td>
+            <td>${cleanBrowser}</td>
+            <td><button class="btn-view" onclick="alert('${encodeURIComponent(r.errorMessage || 'Test passed successfully with no errors.')}')">View</button></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } else {
+        tbody.innerHTML = `<tr><td colspan="6" class="table-status-cell">No test results found for this run.</td></tr>`;
+      }
+    }
+
+    function filterModalResults() {
+      const searchTerm = document.getElementById("modalSearchFilter").value.toLowerCase();
+      const filtered = currentModalResults.filter(r => 
+        (r.testName && r.testName.toLowerCase().includes(searchTerm)) || 
+        (r.suiteName && r.suiteName.toLowerCase().includes(searchTerm))
+      );
+      renderModalTable(filtered);
+    }
+
+    loadDashboardData();
+  </script>
+</body>
+</html>

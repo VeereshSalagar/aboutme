@@ -1,4 +1,11 @@
 node_modules/
 playwright-report/
 test-results/
-frontend/
+test-results.json
+backend/target/
+*.log
+.env
+.env.*
+!.env.example
+
+frontend/build/
