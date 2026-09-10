@@ -41,7 +41,7 @@ export class PortfolioPage {
 
   // ===== Actions =====
   async navigateToPortfolio() {
-  await this.page.goto('/', { waitUntil: 'domcontentloaded' });
+  await this.page.goto('', { waitUntil: 'domcontentloaded' });
 }
 
   // ===== Assertions =====
