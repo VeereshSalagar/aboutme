@@ -21,6 +21,7 @@ jobs:
     - name: Run Playwright tests
       env:
         BASE_URL: https://veereshsalagar.github.io/aboutme/
+        BACKEND_URL: https://volunteers-backend-35oe.onrender.com
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
