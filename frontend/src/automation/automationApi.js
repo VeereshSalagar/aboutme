@@ -1,6 +1,6 @@
 const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
   ? "http://localhost:8081/api/automation"
-  : "https://your-production-backend-domain.com/api/automation"; // Replace with your deployed Spring Boot URL later
+  : "https://volunteers-backend-35oe.onrender.com/api/automation"; // Replace with your deployed Spring Boot URL later
 
 export const automationApi = {
   async getTestRuns() {

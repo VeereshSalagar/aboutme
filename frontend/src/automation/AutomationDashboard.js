@@ -15,7 +15,11 @@ import {
   Cell,
 } from "recharts";
 
-const API_BASE_URL = "http://localhost:8081/api/automation";
+const API_BASE_URL =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:8081/api/automation"
+    : "https://volunteers-backend-35oe.onrender.com/api/automation";
 
 const CHART_COLORS = {
   primary: "#00d2ff",
@@ -86,8 +90,7 @@ function AutomationDashboard() {
       console.error("Automation dashboard error:", err);
 
       setError(
-        "Unable to connect to Spring Boot backend on port 8081."
-      );
+  "Unable to connect to the automation backend. Please check whether the Spring Boot service is running.");
     } finally {
       setLoading(false);
       setRefreshing(false);
