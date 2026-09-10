@@ -13,7 +13,7 @@ test.describe('Portfolio Core Validation (POM)', () => {
     await portfolioPage.verifyMainNavigation();
   });
 
-  test('should display hero section and correct social links', async () => {
+  test('should display hero sections and correct social links', async () => {
     await portfolioPage.verifyHeroSection('https://github.com/VeereshSalagar');
   });
 
