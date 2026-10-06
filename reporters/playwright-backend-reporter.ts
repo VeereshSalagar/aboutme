@@ -75,7 +75,7 @@ class BackendReporter implements Reporter {
       finishedAt: finishTime.toISOString().slice(0, 19)
     };
 
-    const backendUrl = process.env.BACKEND_URL || 'http://localhost:8081';
+    const backendUrl = process.env.BACKEND_URL || 'https://volunteers-backend-35oe.onrender.com';
 
     try {
       console.log('📤 Sending Test Run summary to Spring Boot backend...');
